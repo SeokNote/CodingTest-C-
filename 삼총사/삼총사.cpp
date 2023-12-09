@@ -20,7 +20,7 @@ int solution(vector<int> number) {
         {
             if (temp[i] == 0)
             {
-                 vec.push_back(number[i]);
+                vec.push_back(number[i]);
             }
         }
         Answers.push_back(vec);
@@ -43,5 +43,5 @@ int solution(vector<int> number) {
 int main()
 {
     std::vector<int> asda = { -2, 3, 0, 2, -5 };
-    std::cout<< solution(asda);
+    std::cout << solution(asda);
 }
