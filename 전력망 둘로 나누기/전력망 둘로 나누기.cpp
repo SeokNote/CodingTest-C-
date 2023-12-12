@@ -7,7 +7,7 @@ std::vector<std::vector<int>> Nodes;
 bool IsVisited[101];
 std::vector<int> Answers;
 int count = 0;
-void DFS(int _StartNode,std::vector<std::vector<int>> _Nodes) //1로 시작
+void DFS(int _StartNode, std::vector<std::vector<int>> _Nodes) //1로 시작
 {
 	IsVisited[_StartNode] = true;
 	count++;
@@ -24,7 +24,7 @@ int solution(int n, std::vector<std::vector<int>> wires) // 갯수와 송전탑들 입력
 {
 	int answer = -1;
 	int Min = INT32_MAX;
-	 // 총 9개의 노드
+	// 총 9개의 노드
 	for (int i = 0; i < n - 1; i++)
 	{
 
@@ -44,7 +44,7 @@ int solution(int n, std::vector<std::vector<int>> wires) // 갯수와 송전탑들 입력
 		DFS(1, Nodes);
 		int Num1 = count;
 		int Num2 = abs(n - count);
-		
+
 		int result = abs(Num1 - Num2);
 		if (result < Min)
 		{
