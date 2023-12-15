@@ -9,8 +9,8 @@ std::vector<std::vector<int>> Links;
 std::vector<int> Start;
 std::vector<int> Link;
 /*
-[] [] [] [] 
-[] [] [] [] 
+[] [] [] []
+[] [] [] []
 [] [] [] []
 [] [] [] []
 */
@@ -18,7 +18,7 @@ std::vector<int> Link;
 //4c4를 구한다.
 //6c6을 구한다.
 //거기서 또 조합
-int main() 
+int main()
 {
     int Num = 0;
     int Count = 0;
@@ -30,7 +30,7 @@ int main()
     std::sort(Numbers.begin(), Numbers.end());
 
     do {
-        
+
         for (int i = 0; i < Numbers.size(); i++)
         {
             if (i < Numbers.size() / 2)
@@ -52,7 +52,7 @@ int main()
 
     } while (next_permutation(Numbers.begin(), Numbers.end()));
     std::sort(Starts.begin(), Starts.end());
-    Starts.erase(std::unique(Starts.begin(), Starts.end()),Starts.end());
+    Starts.erase(std::unique(Starts.begin(), Starts.end()), Starts.end());
     std::sort(Links.begin(), Links.end());
     Links.erase(std::unique(Links.begin(), Links.end()), Links.end());
     for (int i = 0; i < Starts.size(); i++)
@@ -69,3 +69,4 @@ int main()
 
     return 0;
 }
+/////////////////////포기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ

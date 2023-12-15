@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="가운데 글자 가져오기.cpp">
+    <ClCompile Include="스타트와 링크.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

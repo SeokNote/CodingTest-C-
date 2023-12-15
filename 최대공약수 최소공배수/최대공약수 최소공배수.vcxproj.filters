@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="가운데 글자 가져오기.cpp">
+    <ClCompile Include="최대공약수 최소공배수.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
