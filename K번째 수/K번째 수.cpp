@@ -11,7 +11,7 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {
         vec.clear();
         for (int j = commands[i][0] - 1; j < commands[i][1]; j++)
         {
-            
+
             vec.push_back(array[j]);
 
         }
@@ -22,6 +22,6 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {
 }
 int main()
 {
-    solution({1, 5, 2, 6, 3, 7, 4} , { {2, 5, 3}, {4, 4, 1}, {1, 7, 3}});
+    solution({ 1, 5, 2, 6, 3, 7, 4 }, { {2, 5, 3}, {4, 4, 1}, {1, 7, 3} });
     return 0;
 }
