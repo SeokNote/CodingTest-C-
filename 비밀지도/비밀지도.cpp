@@ -52,8 +52,22 @@ vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
     }
     return answer;
 }
+
+void Test(vector<string>&& _Value)
+{
+
+}
+
+void Test(vector<string>& _Value)
+{
+
+}
+
 int main()
 {
-    solution(5, { 9, 20, 28, 18, 11 }, { 30, 1, 21, 17, 28 });
+
+    std::vector<std::string> L = solution(5, { 9, 20, 28, 18, 11 }, { 30, 1, 21, 17, 28 });
+    
+    Test(L);
     return 0;
 }

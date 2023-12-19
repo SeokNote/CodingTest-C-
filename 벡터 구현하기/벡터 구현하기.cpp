@@ -54,7 +54,7 @@ public:
 		delete[] CopyArr;
 
 	}
-	
+
 	void clear() // 사이즈만 0으로
 	{
 		m_size = 0;
@@ -66,7 +66,7 @@ public:
 		{
 			reserve(m_capacity * 2);
 		}
-		m_begin[m_size+1] = _Value;
+		m_begin[m_size + 1] = _Value;
 		m_size++;
 	}
 
@@ -77,7 +77,7 @@ public:
 		iterator& operator++()
 		{
 			++iter;
-			return *this; 
+			return *this;
 		}
 		T& operator*()
 		{
@@ -99,7 +99,7 @@ public:
 
 		}
 		T* iter = nullptr;
-		
+
 	};
 	iterator begin()
 	{
@@ -140,7 +140,7 @@ int main()
 	myv.clear();
 	myv.reserve(20);
 	myv.capacity();
-	
+
 	return 0;
 }
 
