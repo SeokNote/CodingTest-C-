@@ -11,13 +11,13 @@ std::vector<int> binary(int _Value, int _n)
     {
         if (_Value % 2 == 1)
         {
-            vec[i] =1;
+            vec[i] = 1;
         }
         else
         {
             vec[i] = 0;
         }
-        _Value /= 2; 	
+        _Value /= 2;
         i++;
     }
     reverse(vec.begin(), vec.end());
@@ -39,7 +39,7 @@ vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
         string str = "";
         for (int j = 0; j < n; j++)
         {
-            if (left[i][j] + right[i][j]>=1)
+            if (left[i][j] + right[i][j] >= 1)
             {
                 str += "#";
             }
