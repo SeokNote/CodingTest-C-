@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <map>
 using namespace std;
-bool compare(std::pair<int,double> _left, std::pair<int, double> _right)
+bool compare(std::pair<int, double> _left, std::pair<int, double> _right)
 {
     if (_left.second == _right.second)
     {
