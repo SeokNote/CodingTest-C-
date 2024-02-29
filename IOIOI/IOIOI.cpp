@@ -43,7 +43,7 @@ int main()
 			}
 			num = 0;
 		}
-    }
+	}
 	std::cout << answer;
 	return 0;
 }
