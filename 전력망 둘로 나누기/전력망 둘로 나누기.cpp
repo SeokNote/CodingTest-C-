@@ -20,6 +20,7 @@ void DFS(int _StartNode, std::vector<std::vector<int>> _Nodes) //1로 시작
 		}
 	}
 }
+
 int solution(int n, std::vector<std::vector<int>> wires) // 갯수와 송전탑들 입력받아
 {
 	int answer = -1;

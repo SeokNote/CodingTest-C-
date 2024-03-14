@@ -73,3 +73,52 @@ int main()
 
 	return 0;
 }
+#include <iostream>
+#include <vector>
+#include <set>
+
+//std::vector<std::set<int>> LinkNodes; //LinkNodes[i] -> i 노드와 연결되어있는 노드들
+std::vector<std::vector<std::set<std::pair<int, int>>>> LinkNodes; //LinkNodes[i] -> i 노드와 연결되어있는 노드들
+std::vector<std::vector<bool>> IsVisit;
+int dx[] = { 1,0,-1,0 };
+int dy[] = { 0,1,0,-1 };
+
+int MaxX, MaxY;
+
+void DFS(int _StartPosX, int _StartPosY)
+{
+	IsVisit[_StartPosY][_StartPosX] = true;
+
+	for (auto i : LinkNodes[_StartPosY][_StartPosX])
+	{
+		if (IsVisit[i])
+		{
+			continue;
+		}
+
+		DFS(i.first, i.second);
+	}
+
+	//for (size_t i = 0; i < 4; i++)
+	//{
+	//	int CheckX = _StartPosX + dx[i];
+	//	int CheckY = _StartPosY + dy[i];
+
+	//	if (CheckX < 0 || CheckY < 0 || CheckX >= MaxX || CheckY >= MaxY)
+	//	{
+	//		continue;
+	//	}
+
+	//	if (IsVisit[CheckY][CheckX] == true)
+	//	{
+	//		continue;
+	//	}
+
+	//	DFS(CheckX, CheckY);
+	//}
+}
+
+int main()
+{
+
+}
