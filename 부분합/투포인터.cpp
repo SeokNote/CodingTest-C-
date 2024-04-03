@@ -1,32 +1,31 @@
 #include <iostream>
-#include <vector>
-#include <limits.h>
-#include <algorithm>
-int Arr[100001];
+
+int Data[10] = { 1,2,3,4,5,6,7,8,9,10 };
+int N = 10;
+int M = 5;
+
 int main()
 {
-	int N, M;
-	std::cin >> N >> M;
-	for (int i = 0; i < N; i++)
+	int right = 0;
+	int PartAdd = 0;
+	int count = 0;
+
+	for (size_t left = 0; left < N; left++)
 	{
-		std::cin >> Arr[i];
-	}
-	std::vector<int> Answers;
-	int Left = -1;
-	int Right = -1;
-	int Sum = 0;
-	while (Left <= Right && Right < N)
-	{
-		if (Sum >= M)
+		while (PartAdd < M && right < N)
 		{
-			Left++;
-			Sum -= Arr[Left];
+			PartAdd += Data[right];
+			right++;
 		}
-		else if (Sum < M)
+
+		if (PartAdd == M)
 		{
-			Right++;
-			Sum += Arr[Right];
+			count++;
 		}
+
+		PartAdd -= Data[left];
 	}
+
+
 	return 0;
 }

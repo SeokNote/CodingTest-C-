@@ -21,7 +21,7 @@ int lcm(int a, int b)
 }
 int main()
 {
-
+    int a = gcd(3, 9);
     return 0;
 }
 //if (n > m)
