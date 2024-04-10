@@ -1,6 +1,6 @@
 #include<iostream>
 #include<cmath>
-
+#include<algorithm>
 int CCW(std::pair<long long, long long> _Point1, std::pair<long long, long long> _Point2, std::pair<long long, long long> _Point3)
 {
     if ((_Point2.first - _Point1.first) * (_Point3.second - _Point1.second) - (_Point3.first - _Point1.first) * (_Point2.second - _Point1.second) > 0)
@@ -16,8 +16,36 @@ int CCW(std::pair<long long, long long> _Point1, std::pair<long long, long long>
         return -1;
     }
 }
+//교점 구하기.
+void find_intersection(std::pair<long long, long long> _Point1, std::pair<long long, long long> _Point2, std::pair<long long, long long> _Point3, std::pair<long long, long long> _Point4) // 교점 구하기
+{
+    double px = (_Point1.first * _Point2.second - _Point1.second * _Point2.first) * (_Point3.first - _Point4.first) - (_Point1.first - _Point2.first) * (_Point3.first * _Point4.second - _Point3.second * _Point4.first);
+    double py = (_Point1.first * _Point2.second - _Point1.second * _Point2.first) * (_Point3.second - _Point4.second) - (_Point1.second - _Point2.second) * (_Point3.first * _Point4.second - _Point3.second * _Point4.first);
+    double p = (_Point1.first - _Point2.first) * (_Point3.second - _Point4.second) - (_Point1.second - _Point2.second) * (_Point3.first - _Point4.first);
 
-bool IsIntersect(std::pair<std::pair<long long, long long>, std::pair<long long, long long>> _Line1, std::pair<std::pair<long long, long long>, std::pair<long long, long long>> _Line2)
+    if (p == 0) // 평행할 때
+    {
+        // 교점이 하나일 때
+        if (_Point2 == _Point3 && _Point1 <= _Point3)
+        {
+            std::cout << _Point2.first << " " << _Point2.second << '\n';
+        }
+        else if (_Point1 == _Point4 && _Point3 <= _Point1)
+        {
+            std::cout << _Point1.first << " " << _Point1.second << '\n';
+        }
+    }
+    else // 교차할 때
+    {
+        double x = px / p;
+        double y = py / p;
+
+        std::cout << std::fixed;
+        std::cout.precision(9);
+        std::cout << x << " " << y;
+    }
+}
+void IsIntersect(std::pair<std::pair<long long, long long>, std::pair<long long, long long>> _Line1, std::pair<std::pair<long long, long long>, std::pair<long long, long long>> _Line2)
 {
     std::pair<long long, long long> A = _Line1.first;
     std::pair<long long, long long> B = _Line1.second;
@@ -38,20 +66,22 @@ bool IsIntersect(std::pair<std::pair<long long, long long>, std::pair<long long,
         }
         if (B >= C && A <= D)
         {
-            return true;
+            std::cout << 1 << '\n';
+            find_intersection(A, B, C, D);
         }
         else
         {
-            return false;
+            std::cout << 0 << '\n';
         }
     }
     else if (AB <= 0 && CD <= 0)
     {
-        return true;
+        std::cout << 1 << '\n';
+        find_intersection(A, B, C, D);
     }
     else
     {
-        return false;
+        std::cout << 0 << '\n';
     }
 
 }
@@ -71,16 +101,7 @@ int main() {
 
     int answer = 0;
 
-    if (IsIntersect(Line1, Line2))
-    {
-        answer = 1;
-    }
-    else
-    {
-        answer = 0;
-    }
-
-
-    std::cout << answer;
+    IsIntersect(Line1, Line2);
+    
     return 0;
 }
