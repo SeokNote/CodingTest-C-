@@ -47,8 +47,8 @@ int main()
 	std::cout.tie(NULL);
 
 	std::cin >> N;
-	shake.resize(N+1);
-	answer.resize(N + 1,-1);
+	shake.resize(N + 1);
+	answer.resize(N + 1, -1);
 	nums.resize(N + 1);
 	temp.resize(N + 1);
 
@@ -63,7 +63,7 @@ int main()
 		nums[i] = i;
 		temp[i] = i;
 	}
-	while (complet!=N)
+	while (complet != N)
 	{
 		cardshuffle();
 	}
@@ -77,5 +77,5 @@ int main()
 	std::cout << lcmnum;
 
 	return 0;
-	
+
 }
