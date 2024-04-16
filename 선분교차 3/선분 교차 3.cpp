@@ -1,107 +1,101 @@
-#include<iostream>
-#include<cmath>
-#include<algorithm>
-int CCW(std::pair<long long, long long> _Point1, std::pair<long long, long long> _Point2, std::pair<long long, long long> _Point3)
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+
+double CCW(std::pair<double, double> _A, std::pair<double, double> _B, std::pair<double, double> _C)
 {
-    if ((_Point2.first - _Point1.first) * (_Point3.second - _Point1.second) - (_Point3.first - _Point1.first) * (_Point2.second - _Point1.second) > 0)
+    double Sum = 0.0;
+
+    Sum += (_A.first * _B.second) + (_B.first * _C.second) + (_C.first * _A.second);
+    Sum -= (_A.second * _B.first) + (_B.second * _C.first) + (_C.second * _A.first);
+
+    if (Sum > 0)
     {
-        return 1;
+        return 1.0;
     }
-    else if ((_Point2.first - _Point1.first) * (_Point3.second - _Point1.second) - (_Point3.first - _Point1.first) * (_Point2.second - _Point1.second) == 0)
+    else if (Sum < 0)
+    {
+        return -1.0;
+    }
+    else
     {
         return 0;
     }
-    else
-    {
-        return -1;
-    }
 }
-//교점 구하기.
-void find_intersection(std::pair<long long, long long> _Point1, std::pair<long long, long long> _Point2, std::pair<long long, long long> _Point3, std::pair<long long, long long> _Point4) // 교점 구하기
-{
-    double px = (_Point1.first * _Point2.second - _Point1.second * _Point2.first) * (_Point3.first - _Point4.first) - (_Point1.first - _Point2.first) * (_Point3.first * _Point4.second - _Point3.second * _Point4.first);
-    double py = (_Point1.first * _Point2.second - _Point1.second * _Point2.first) * (_Point3.second - _Point4.second) - (_Point1.second - _Point2.second) * (_Point3.first * _Point4.second - _Point3.second * _Point4.first);
-    double p = (_Point1.first - _Point2.first) * (_Point3.second - _Point4.second) - (_Point1.second - _Point2.second) * (_Point3.first - _Point4.first);
 
-    if (p == 0) // 평행할 때
+void FindImpact(std::pair<double, double> A, std::pair<double, double> B, std::pair<double, double> C, std::pair<double, double> D)
+{
+    double PX = (A.first * B.second - A.second * B.first) * (C.first - D.first) - (A.first - B.first) * (C.first * D.second - C.second * D.first);
+    double PY = (A.first * B.second - A.second * B.first) * (C.second - D.second) - (A.second - B.second) * (C.first * D.second - C.second * D.first);
+    double P = (A.first - B.first) * (C.second - D.second) - (A.second - B.second) * (C.first - D.first);
+
+    if (0 == P) 
     {
-        // 교점이 하나일 때
-        if (_Point2 == _Point3 && _Point1 <= _Point3)
+        if (B == C && A <= C)
         {
-            std::cout << _Point2.first << " " << _Point2.second << '\n';
+            std::cout << B.first << " " << B.second << '\n';        
         }
-        else if (_Point1 == _Point4 && _Point3 <= _Point1)
-        {
-            std::cout << _Point1.first << " " << _Point1.second << '\n';
+        else if (A == D && C <= A)
+        {        
+            std::cout << A.first << " " << A.second << '\n';
         }
     }
-    else // 교차할 때
+    else 
     {
-        double x = px / p;
-        double y = py / p;
+        double X = PX / P;
+        double Y = PY / P;
 
         std::cout << std::fixed;
-        std::cout.precision(9);
-        std::cout << x << " " << y;
+        std::cout.precision(16);
+        std::cout << X << " " << Y;
     }
 }
-void IsIntersect(std::pair<std::pair<long long, long long>, std::pair<long long, long long>> _Line1, std::pair<std::pair<long long, long long>, std::pair<long long, long long>> _Line2)
-{
-    std::pair<long long, long long> A = _Line1.first;
-    std::pair<long long, long long> B = _Line1.second;
-    std::pair<long long, long long> C = _Line2.first;
-    std::pair<long long, long long> D = _Line2.second;
 
-    int AB = CCW(A, B, C) * CCW(A, B, D);
-    int CD = CCW(C, D, A) * CCW(C, D, B);
-    if (AB == 0 && CD == 0)
+int main()
+{
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
+
+    std::pair<double, double> A, B, C, D;
+
+    std::cin >> A.first >> A.second >> B.first >> B.second;
+    std::cin >> C.first >> C.second >> D.first >> D.second;
+
+    double CCWA = CCW(A, B, C) * CCW(A, B, D);
+    double CCWB = CCW(C, D, A) * CCW(C, D, B);
+
+    if (0 == CCWA && 0 == CCWB)
     {
-        if (A > C)
+        // 일직선        
+        if (A > B)
         {
-            std::swap(A, C);
+            std::swap(A, B);
         }
-        if (B > D)
+        if (C > D)
         {
-            std::swap(B, D);
+            std::swap(C, D);
         }
-        if (B >= C && A <= D)
+
+        if (A <= D && B >= C)
         {
             std::cout << 1 << '\n';
-            find_intersection(A, B, C, D);
+            FindImpact(A, B, C, D);
         }
         else
         {
-            std::cout << 0 << '\n';
+            std::cout << 0;
         }
     }
-    else if (AB <= 0 && CD <= 0)
+    else if (0 < CCWA || 0 < CCWB)
     {
-        std::cout << 1 << '\n';
-        find_intersection(A, B, C, D);
+        std::cout << 0;
     }
     else
     {
-        std::cout << 0 << '\n';
+        std::cout << 1 << '\n';
+        FindImpact(A, B, C, D);
     }
 
-}
-int main() {
-    std::pair<std::pair<long long, long long>, std::pair<long long, long long>> Line1;
-    std::pair<std::pair<long long, long long>, std::pair<long long, long long>> Line2;
-
-    std::cin >> Line1.first.first >> Line1.first.second;
-    std::cin >> Line1.second.first >> Line1.second.second;
-    std::cin >> Line2.first.first >> Line2.first.second;
-    std::cin >> Line2.second.first >> Line2.second.second;
-
-    std::pair<long long, long long> A = Line1.first;
-    std::pair<long long, long long> B = Line1.second;
-    std::pair<long long, long long> C = Line2.first;
-    std::pair<long long, long long> D = Line2.second;
-
-    int answer = 0;
-
-    IsIntersect(Line1, Line2);
-    
     return 0;
 }
