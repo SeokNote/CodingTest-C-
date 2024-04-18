@@ -49,25 +49,18 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-
-    int N = 0;
-    cin >> N;
-
-    Parent.resize(N + 1);
-
-    for (int y = 1; y <= N; y++)
+    int N, M;
+    std::cin >> N >> M;
+    for (int i = 0; i < M; i++)
     {
-        for (int x = 1; x <= N; x++)
-        {
-            int Weight = 0;
-            cin >> Weight;
-            if (y < x)
-            {
-                Flows.push_back({ { y, x }, Weight });
-            }
-        }
+        int House = 0;
+        int HouseLink = 0;
+        int dist = 0;
+        std::cin >> House >> HouseLink >> dist;
+        Flows.push_back({ { House, HouseLink }, dist });
     }
 
+    Parent.resize(N + 1);
     for (int i = 1; i <= N; i++)
     {
         Parent[i] = i;
@@ -76,6 +69,7 @@ int main()
     sort(Flows.begin(), Flows.end(), Compair);
 
     long long Result = 0;
+    int lastweight = 0;
     for (size_t i = 0; i < Flows.size(); i++)
     {
         int From = Flows[i].first.first;
@@ -89,11 +83,10 @@ int main()
         {
             Union_Parent(From_Parent, To_Parent);
             Result += Weight;
+            lastweight = Weight;
         }
     }
 
-    cout << Result << '\n';
-
+    cout << Result -lastweight  << '\n';
     return 0;
 }
-[출처] [C++] 백준(16398) 행성연결 | 작성자 난너무슬프다
