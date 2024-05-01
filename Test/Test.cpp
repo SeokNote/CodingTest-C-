@@ -1,36 +1,38 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
-#include <set>
+std::vector<int> numtable(100001, 0);
 int main()
 {
-	int N,M;
-	std::cin >> N>>M;
-	std::vector<int> answer;
-	std::vector<std::string> keword;
-	std::set<std::string> Newkeword;
-	std::vector<std::string> searchkeword1;
-	keword.resize(N);
+	int N, M;
+	std::cin >> N >> M;
+	int right = 0;
+	std::vector<int> nums;
+	int answer = -1;
+	nums.resize(N+1);
 	for (int i = 0; i < N; i++)
 	{
-		std::cin >> keword[i];
+		int num = 0;
+		std::cin >> num;
+		nums[i]=num;
 	}
-	for (int i = 0; i < M; i++)
+	for (int left = 0; left < nums.size(); left++)
 	{
-		std::string str = "";
-		std::cin >> str;
-		while (str.find(',') != std::string::npos)
+
+		while (numtable[nums[right]] < M && right < N)
 		{
-			size_t slice = str.find(',');
-			Newkeword.insert(str.substr(0, slice));
-			str.erase(str.begin(), str.begin() + slice);
-			str.erase(str.begin());
+			numtable[nums[right]] += 1;
+			right++;
 		}
-		Newkeword.insert(str);
-		answer.push_back(N - Newkeword.size());
+		answer = std::max(answer, right - left);
+		if (right == N)
+		{
+			break;
+		}
+		numtable[nums[left]] -= 1;
 	}
-	for (int i = 0; i < answer.size(); i++)
-	{
-		std::cout << answer[i] << "\n";
-	}
+	std::cout << answer;
+
 	return 0;
 }
+
