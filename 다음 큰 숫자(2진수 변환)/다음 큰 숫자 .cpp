@@ -32,6 +32,6 @@ int solution(int n) {
 }
 int main()
 {
-    std::cout<<solution(78);
+    std::cout << solution(78);
     return 0;
 }
