@@ -10,7 +10,7 @@ int selfnuber(int num)
 	std::string str = std::to_string(num);
 	for (int i = 0; i < str.size(); i++)
 	{
-		result +=str[i] - '0';
+		result += str[i] - '0';
 	}
 	result += num;
 	return result;
