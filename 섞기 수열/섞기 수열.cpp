@@ -58,15 +58,18 @@ int main()
 		std::cin >> num;
 		shake[i] = num;
 	}
+
 	for (int i = 1; i <= N; i++)
 	{
 		nums[i] = i;
 		temp[i] = i;
 	}
+
 	while (complet != N)
 	{
 		cardshuffle();
 	}
+
 	long long lcmnum = answer[1];
 
 	for (int i = 2; i < answer.size(); i++)
