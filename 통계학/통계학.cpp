@@ -67,7 +67,7 @@ int Mode()
 int Range(std::vector<int>& _Numbers)
 {
 	std::sort(_Numbers.begin(), _Numbers.end());
-	return _Numbers[N-1]-Numbers[0];
+	return _Numbers[N - 1] - Numbers[0];
 }
 
 int main()
@@ -78,7 +78,7 @@ int main()
 	{
 		std::cin >> Numbers[i];
 	}
-	std::cout << Mean()<<"\n";
+	std::cout << Mean() << "\n";
 	std::cout << Middle(Numbers) << "\n";
 	std::cout << Mode() << "\n";
 	std::cout << Range(Numbers) << "\n";
