@@ -16,10 +16,10 @@ int main()
 		vec.push_back(std::make_pair(weight, len));
 	}
 
-	for (int i = 0; i < N; i++) 
+	for (int i = 0; i < N; i++)
 	{
 		answer = 1;
-		for (int j = 0; j < N; j++) 
+		for (int j = 0; j < N; j++)
 		{
 			if (vec[i].first < vec[j].first && vec[i].second < vec[j].second)
 			{
