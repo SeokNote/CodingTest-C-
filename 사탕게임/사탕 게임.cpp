@@ -18,9 +18,9 @@ int CandyCnt()
 	for (int y = 0; y < N; y++)
 	{
 		int RowCnt = 1;
-		for (int x = 0; x < N-1; x++)
+		for (int x = 0; x < N - 1; x++)
 		{
-			if (CopyGrid[y][x] == CopyGrid[y][x+1])
+			if (CopyGrid[y][x] == CopyGrid[y][x + 1])
 			{
 				RowCnt++;
 			}
@@ -44,9 +44,9 @@ int CandyCnt()
 	for (int x = 0; x < N; x++)
 	{
 		int ColCnt = 1;
-		for (int y = 0; y < N -1; y++)
+		for (int y = 0; y < N - 1; y++)
 		{
-			if (CopyGrid[y][x] == CopyGrid[y+1][x])
+			if (CopyGrid[y][x] == CopyGrid[y + 1][x])
 			{
 				ColCnt++;
 			}
@@ -78,7 +78,7 @@ void SwapCandy(int _y, int _x)
 		CopyGrid = Grid;
 		int NextPosX = _x + dx[i];
 		int NextPosY = _y + dy[i];
-		if (NextPosX<0 || NextPosY <0 || NextPosX>=N || NextPosY >=N)
+		if (NextPosX < 0 || NextPosY < 0 || NextPosX >= N || NextPosY >= N)
 		{
 			continue;
 		}
