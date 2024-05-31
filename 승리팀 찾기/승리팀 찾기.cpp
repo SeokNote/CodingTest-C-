@@ -57,7 +57,7 @@ void SpeedGame(const std::vector<std::pair<std::string, std::string>> _Teams)
     {
         if (TeamScore[i].first == "blue")
         {
-            if (TeamScore[i].second - FirstTime >= 10.0f)
+            if (TeamScore[i].second - FirstTime >= 10.0)
             {
                 BlueTotalScore += 0;
             }
