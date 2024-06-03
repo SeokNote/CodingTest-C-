@@ -1,153 +1,83 @@
 #include <iostream>
 #include <vector>
-#include <queue>
-//첫 번째 갇힌 공기를 찾는다. 
-//공기로 bfs돌고 2로 바꾸고 0은 갇힌 공기 
-//두 변이 접촉한 치즈를 찾아 공기(2)로 바꾼다
-//위에 반복
-std::vector<std::vector<int>> Grid;
-std::vector<std::vector<int>> Cheeses;
-std::vector<std::vector<int>> CopyGrid;
+#include <algorithm>
+/*
+* 1년간의 인사고과에 따라 인센티브 지급
+* 근무 태도 점수 , 동료 평가 점수 기록
+* 임의의 다른 사원보다 이 두점수가 낮으면 인센티브x
+* 그렇지 않으면 높은 순으로 인센티브 지급
+* 두 점수의 합이 동일하면 동석차
+* 동석차 수만큼 다음 석차는 건너뜀
+*/
+std::vector<std::pair<int, int>> Arr;
 
-int dx[4] = { -1,0,1,0 };
-int dy[4] = { 0,1,0,-1 };
-int N, M;
-
-void ChangeAir(int _y, int _x)
+bool Compare(std::pair<int, int> _a, std::pair<int, int> _b)
 {
-	Grid[_y][_x] = 0;
-	std::queue<std::pair<int, int>> q;
-	q.push({ _y, _x });
-	while (!q.empty())
-	{
-		std::pair<int, int> curpos = q.front();
-		q.pop();
-		for (int i = 0; i < 4; i++)
-		{
-			int CheckX = curpos.second + dx[i];
-			int CheckY = curpos.first + dy[i];
-			if (CheckX < 0 || CheckY < 0 || CheckX >= M || CheckY >= N)
-			{
-				continue;
-			}
-
-			if (Grid[CheckY][CheckX] == 1)
-			{
-				Cheeses[CheckY][CheckX]++;
-				continue;
-			}
-
-			if (Grid[CheckY][CheckX] == 2)
-			{
-				continue;
-			}
-
-			Grid[CheckY][CheckX] = 2;
-			q.push({ CheckY, CheckX });
-
-		}
-	}
-
+	return _a.first < _b.first;
 }
 
-void ChangeCheese()
+bool SumCompare(std::pair<int, int> _a, std::pair<int, int> _b)
 {
-	for (int y = 0; y < N; y++)
-	{
-		for (int x = 0; x < M; x++)
-		{
-			if (CopyGrid[y][x] == 1)
-			{
-				int cnt = 0;
-				for (int i = 0; i < 4; i++)
-				{
-					int CheckX = x + dx[i];
-					int CheckY = y + dy[i];
-					if (CheckX < 0 || CheckY < 0 || CheckX >= M || CheckY >= N)
-					{
-						continue;
-					}
-					if (CopyGrid[CheckY][CheckX] == 1)
-					{
-						continue;
-					}
-					if (CopyGrid[CheckY][CheckX] == 2)
-					{
-						cnt++;
-					}
-				}
-				if (cnt >= 2)
-				{
-					Grid[y][x] = 2;
-				}
-			}
-
-		}
-	}
+	int Total1 = _a.first + _a.second;
+	int Total2 = _b.first + _b.second;
+	return Total1 < Total2;
 }
 
-void EraseCheese()
+int solution(std::vector<std::vector<int>> scores)
 {
-	for (int y = 0; y < N; y++)
+	bool WanhoValue = false;
+	int answer = 0;
+	int WanhoScore1 = scores[0][0];
+	int WanhoScore2 = scores[0][1];
+	Arr.resize(scores.size());
+	for (int i = 0; i < scores.size(); i++)
 	{
-		for (int x = 0; x < M; x++)
+		Arr[i].first = scores[i][0];
+		Arr[i].second = scores[i][1];
+	}
+
+	std::sort(Arr.begin(), Arr.end(), Compare);
+	//못받는놈 체크
+	for (int i = 0; i < Arr.size() - 1; i++)
+	{
+		if (Arr[i].first < Arr[i + 1].first && Arr[i].second < Arr[i + 1].second)
 		{
-			if (Cheeses[y][x] >= 2)
+			if (Arr[i].first == WanhoScore1 && Arr[i].second == WanhoScore2)
 			{
-				Grid[y][x] = 2;
+				return -1;
 			}
+			Arr[i].first = 0;
+			Arr[i].second = 0;
 		}
 	}
-}
-
-void Init()
-{
-	for (int y = 0; y < N; y++)
+	std::sort(Arr.begin(), Arr.end(), SumCompare);
+	int MaxScore = 0;
+	int Cnt = 0;
+	int JumCnt = 0;
+	for (int i = Arr.size() - 1; i >= 0; i--)
 	{
-		for (int x = 0; x < M; x++)
+		int TotalScore = Arr[i].first + Arr[i].second;
+		if (MaxScore == TotalScore)
 		{
-			Cheeses[y][x] = 0;
-			if (Grid[y][x] == 2)
-			{
-				Grid[y][x] = 0;
-			}
+			JumCnt++;
 		}
-	}
-}
+		else
+		{
+			Cnt = Cnt + JumCnt + 1;
+			JumCnt = 0;
+		}
+		if (Arr[i].first == WanhoScore1 && Arr[i].second == WanhoScore2)
+		{
+			answer = Cnt;
+		}
+		MaxScore = TotalScore;
 
+	}
+
+	return answer;
+}
 int main()
 {
-	int answer = 0;
-	std::cin >> N >> M;
-	Grid.resize(N);
-	Cheeses.resize(N);
-	for (int y = 0; y < N; y++)
-	{
-		Grid[y].resize(M);
-		Cheeses[y].resize(M);
-		for (int x = 0; x < M; x++)
-		{
-			Cheeses[y][x] = 0;
-			std::cin >> Grid[y][x];
-		}
-	}
-
-	for (int y = 0; y < N; y++)
-	{
-		for (int x = 0; x < M; x++)
-		{
-			if (Grid[y][x] == 1)
-			{
-				ChangeAir(0, 0);
-				//CopyGrid = Grid;
-				EraseCheese();
-				Init();
-				//ChangeCheese();
-				//Init();
-				answer++;
-			}
-		}
-	}
-	std::cout << answer;
+	std::cout << solution({ {4,3}, {5,2}, {5,4}, {4,5}, {4,4} });
 	return 0;
 }
