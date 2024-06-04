@@ -5,13 +5,13 @@ std::vector<std::pair<int, int>> Nodes;
 std::vector<std::vector<int>> Grid;
 std::vector<bool> RootCheck;
 int xPos = 0;
-void DFS(int _Node,int _level)
+void DFS(int _Node, int _level)
 {
 	if (_Node == -1)
 	{
 		return;
 	}
-	DFS(Nodes[_Node].first, _level +1);
+	DFS(Nodes[_Node].first, _level + 1);
 	Grid[_level].push_back(xPos++);
 	DFS(Nodes[_Node].second, _level + 1);
 }
@@ -20,7 +20,7 @@ int main()
 {
 	int N;
 	std::cin >> N;
-	Nodes.resize(N+1);
+	Nodes.resize(N + 1);
 	Grid.resize(N + 1);
 	RootCheck.resize(N + 1);
 	for (int i = 0; i < N; i++)
@@ -52,7 +52,7 @@ int main()
 			Root = i;
 		}
 	}
-	DFS(Root,1);
+	DFS(Root, 1);
 	int Max = 0;
 	int Level = 0;
 
@@ -60,7 +60,7 @@ int main()
 	{
 		if (Grid[i].size() != 0)
 		{
-			int Len = Grid[i][Grid[i].size() - 1] - Grid[i][0] +1;
+			int Len = Grid[i][Grid[i].size() - 1] - Grid[i][0] + 1;
 			if (Max < Len)
 			{
 				Max = Len;
