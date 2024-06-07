@@ -1,6 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+//#include <iostream>
+//#include <vector>
+//#include <queue>
 //첫번째 풀이
 //
 ////첫 번째 갇힌 공기를 찾는다. 
