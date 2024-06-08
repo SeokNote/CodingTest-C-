@@ -411,6 +411,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "치즈(1)", "치즈(1)\치�
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "동전(1)", "동전(1)\동전(1).vcxproj", "{B9993F87-9E91-4865-A3CC-FEE8F1EAFBF3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "카드 구매하기", "카드 구매하기\카드 구매하기.vcxproj", "{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1891,6 +1893,14 @@ Global
 		{B9993F87-9E91-4865-A3CC-FEE8F1EAFBF3}.Release|x64.Build.0 = Release|x64
 		{B9993F87-9E91-4865-A3CC-FEE8F1EAFBF3}.Release|x86.ActiveCfg = Release|Win32
 		{B9993F87-9E91-4865-A3CC-FEE8F1EAFBF3}.Release|x86.Build.0 = Release|Win32
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Debug|x64.ActiveCfg = Debug|x64
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Debug|x64.Build.0 = Debug|x64
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Debug|x86.ActiveCfg = Debug|Win32
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Debug|x86.Build.0 = Debug|Win32
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Release|x64.ActiveCfg = Release|x64
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Release|x64.Build.0 = Release|x64
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Release|x86.ActiveCfg = Release|Win32
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2059,6 +2069,7 @@ Global
 		{5F16F6B0-841A-4938-A48A-24CD59D25072} = {097D4F97-4157-4726-81A9-53840437B2C1}
 		{964779EB-CED0-4CA9-BC2F-B6C0D6ABC969} = {4AA4244E-D13A-4785-83B7-89DF36BC6821}
 		{B9993F87-9E91-4865-A3CC-FEE8F1EAFBF3} = {097D4F97-4157-4726-81A9-53840437B2C1}
+		{F5CC4EB0-43EF-4C63-BA3D-C3A75099856F} = {097D4F97-4157-4726-81A9-53840437B2C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98D3CF6E-8106-4DCC-B3FD-5332B56ED0C1}

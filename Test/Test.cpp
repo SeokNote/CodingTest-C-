@@ -1,41 +1,71 @@
 #include <iostream>
 #include <vector>
-std::vector<int> Nums;
-int DP[100001] = { 0 };
+
+class A
+{
+public : 
+    void operator =(A& a)
+    {
+        std::cout << "&" << std::endl;
+    }
+
+
+    void operator =(A&& a)
+    {
+        std::cout << "&&" << std::endl;
+    }
+
+
+    A()
+    {
+        std::cout << "C" << std::endl;
+    }
+
+    A(A& a)
+    {
+        std::cout << "&" << std::endl;
+    }
+
+    A(A&& a)
+    {
+        std::cout << "&&" << std::endl;
+    }
+
+    ~A()
+    {
+        std::cout << "D" << std::endl;
+    }
+};
+
+A Func1(A a)
+{
+    return a;
+}
+
+A Func2(A& a)
+{
+    return a;
+}
+
+A Test()
+{
+    A Return;
+    return Return;
+}
+
 int main()
 {
-	int N;
-	int answer = INT32_MIN;
-	std::cin >> N;
-	Nums.resize(N);
-	for (int i = 0; i < N; i++)
-	{
-		std::cin >> Nums[i];
-	}
-	DP[0] = Nums[0];
-	for (int i = 1; i < N; i++)
-	{
-		if (DP[i - 1] + Nums[i] > 0)
-		{
-			if (DP[i - 1] + Nums[i] < Nums[i])
-			{
-				DP[i] = Nums[i];
-			}
-			else
-			{
-				DP[i] = DP[i - 1] + Nums[i];
-			}
-		}
-		else
-		{
-			DP[i] = Nums[i];
-		}
-	}
-	for (int i = 0; i < N; i++)
-	{
-		answer = std::max(answer, DP[i]);
-	}
-	std::cout << answer;
-	return 0;
+    //A Return;
+    //Return = Test();
 
+    A a; // C
+    A b(a); // &
+    A c;
+    c = Func1(b);
+    
+    A d(
+        Func2(c)
+    );
+    
+    return 0;
 }
