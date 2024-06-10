@@ -1,71 +1,60 @@
 #include <iostream>
-#include <vector>
+#include <crtdbg.h>
 
-class A
+using namespace std;
+
+class Parent
 {
-public : 
-    void operator =(A& a)
-    {
-        std::cout << "&" << std::endl;
-    }
+public:
+	Parent()
+	{
+		cout << "何葛 积己" << "\n";
+		Fuc();
+		a = new int;
+	}
 
+	virtual ~Parent()
+	{
+		delete a;
+	}
+	virtual void Fuc()
+	{
 
-    void operator =(A&& a)
-    {
-        std::cout << "&&" << std::endl;
-    }
-
-
-    A()
-    {
-        std::cout << "C" << std::endl;
-    }
-
-    A(A& a)
-    {
-        std::cout << "&" << std::endl;
-    }
-
-    A(A&& a)
-    {
-        std::cout << "&&" << std::endl;
-    }
-
-    ~A()
-    {
-        std::cout << "D" << std::endl;
-    }
+	}
+protected:
+	int* a = nullptr;
 };
 
-A Func1(A a)
+class Child : public Parent
 {
-    return a;
-}
+public:
+	Child()
+	{
+		cout << "磊侥 积己" << "\n";
+		b = new int;
+	}
+	~Child() override
+	{
+		cout << "磊侥 昏力" << "\n";
+		delete b;
+	}
+	int* b = nullptr;
 
-A Func2(A& a)
-{
-    return a;
-}
 
-A Test()
-{
-    A Return;
-    return Return;
-}
+};
 
 int main()
 {
-    //A Return;
-    //Return = Test();
+	{
+		//int* a = new int;
+		Parent* ParentPtr = new Parent();
+		//delete ParentPtr;
+		//delete a;
+	}
+	 _CrtDumpMemoryLeaks();
+	//delete ParentPtr;
 
-    A a; // C
-    A b(a); // &
-    A c;
-    c = Func1(b);
-    
-    A d(
-        Func2(c)
-    );
-    
-    return 0;
+
+
+	return 0;
 }
