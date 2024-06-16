@@ -1,6 +1,6 @@
 #include <iostream>
 #include <crtdbg.h>
-
+#include <typeinfo>
 using namespace std;
 
 class Parent
@@ -9,17 +9,12 @@ public:
 	Parent()
 	{
 		cout << "何葛 积己" << "\n";
-		Fuc();
 		a = new int;
 	}
 
-	virtual ~Parent()
+	~Parent()
 	{
 		delete a;
-	}
-	virtual void Fuc()
-	{
-
 	}
 protected:
 	int* a = nullptr;
@@ -33,7 +28,7 @@ public:
 		cout << "磊侥 积己" << "\n";
 		b = new int;
 	}
-	~Child() override
+	~Child()
 	{
 		cout << "磊侥 昏力" << "\n";
 		delete b;
@@ -45,16 +40,11 @@ public:
 
 int main()
 {
-	{
-		//int* a = new int;
-		Parent* ParentPtr = new Parent();
-		//delete ParentPtr;
-		//delete a;
-	}
-	 _CrtDumpMemoryLeaks();
-	//delete ParentPtr;
 
-
+	Parent* ParentPtr = new Child();
+	std::cout << typeid(ParentPtr).name() << "\n";
+	std::cout << typeid(*ParentPtr).name() << "\n";
+	delete ParentPtr;
 
 	return 0;
 }
