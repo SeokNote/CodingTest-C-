@@ -14,7 +14,7 @@ public:
 
 	~Parent()
 	{
-		delete a;
+		cout << "부모 삭제" << "\n";
 	}
 protected:
 	int* a = nullptr;
@@ -41,7 +41,7 @@ public:
 int main()
 {
 
-	Parent* ParentPtr = new Child();
+	Parent* ParentPtr = new Parent();
 	std::cout << typeid(ParentPtr).name() << "\n";
 	std::cout << typeid(*ParentPtr).name() << "\n";
 	delete ParentPtr;
