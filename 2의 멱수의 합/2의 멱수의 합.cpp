@@ -10,19 +10,13 @@ int main()
 	std::cin >> N;
     DP.resize(N+1);
     DP[0] = 1;
-    for (int i = 1; i < N; i++)
+    for (int i = 1; i <= N; i*=2)
     {
-        int pow = std::pow(2, i);
-        for (int j = pow; j <= N; j++)
+        for (int j = i; j <= N; j++)
         {
-            DP[j] = (DP[j] + DP[j - pow])% mod;
+            DP[j] = (DP[j] % mod + DP[j - i] % mod)% mod;
         }
     }
-    int max = 0;
-    for (int i = 0; i <= N; i++)
-    {
-        max = std::max(max,DP[i]);
-    }
-    std::cout << max;
+    std::cout << DP[N];
     return 0;
 }
