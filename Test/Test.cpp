@@ -1,50 +1,65 @@
 #include <iostream>
-#include <crtdbg.h>
-#include <typeinfo>
-using namespace std;
+#include <vector>
 
-class Parent
+int N, M;
+std::vector<int> Parent;
+
+void Union(int Left, int Right)
 {
-public:
-	Parent()
+	if (Left < Right)
 	{
-		cout << "何葛 积己" << "\n";
-		a = new int;
+		Parent[Right] = Left;
 	}
-
-	~Parent()
+	else
 	{
-		cout << "何葛 昏力" << "\n";
+		Parent[Left] = Right;
 	}
-protected:
-	int* a = nullptr;
-};
+}
 
-class Child : public Parent
+int FindParent(int Value)
 {
-public:
-	Child()
+	if (Parent[Value] == Value)
 	{
-		cout << "磊侥 积己" << "\n";
-		b = new int;
+		return Value;
 	}
-	~Child()
-	{
-		cout << "磊侥 昏力" << "\n";
-		delete b;
-	}
-	int* b = nullptr;
 
-
-};
+	Parent[Value] = FindParent(Parent[Value]);
+	return Parent[Value];
+}
 
 int main()
 {
+	std::ios_base::sync_with_stdio(false);
+	std::cin.tie(NULL);
+	std::cout.tie(NULL);
 
-	Parent* ParentPtr = new Parent();
-	std::cout << typeid(ParentPtr).name() << "\n";
-	std::cout << typeid(*ParentPtr).name() << "\n";
-	delete ParentPtr;
+	std::cin >> N >> M;
+	Parent.resize(N);
+	for (int i = 0; i < N; i++)
+	{
+		Parent[i] = i;
+	}
 
+	for (int i = 0; i < M; i++)
+	{
+		int FirstNode, SecondNode;
+
+		std::cin >> FirstNode >> SecondNode;
+
+		int FirstParent = FindParent(FirstNode);
+		int SecondParent = FindParent(SecondNode);
+
+		if (FirstParent != SecondParent)
+		{
+			Union(FirstParent, SecondParent);
+		}
+		else
+		{
+			std::cout << i + 1;
+			return 0;
+		}
+	}
+
+	std::cout << 0;
 	return 0;
 }
