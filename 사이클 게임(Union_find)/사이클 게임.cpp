@@ -30,7 +30,7 @@ int FindParent(int _Num)
 int main()
 {
 	std::cin >> N >> M;
-	Parent.resize(N+1);
+	Parent.resize(N + 1);
 	//자기 자신을 부모로 둔다.
 	for (int i = 1; i <= N; i++)
 	{
